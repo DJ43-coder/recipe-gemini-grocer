@@ -5,8 +5,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const API_KEY = "YOUR_GEMINI_API_KEY"; 
 
 // Initialize the Gemini API
-const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const getGenAI = () => {
+  if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY") {
+    throw new Error("Please set your Gemini API key in geminiService.ts");
+  }
+  return new GoogleGenerativeAI(API_KEY);
+};
 
 export interface RecipeIngredient {
   name: string;
@@ -26,6 +30,9 @@ export interface Recipe {
 
 export async function generateRecipe(dishName: string, servings: number): Promise<Recipe> {
   try {
+    const genAI = getGenAI();
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    
     const prompt = `
       Generate a detailed recipe for ${dishName} that serves ${servings} people.
       Format the response as a JSON object with the following structure:
@@ -78,7 +85,7 @@ export async function generateRecipe(dishName: string, servings: number): Promis
     
   } catch (error) {
     console.error("Error generating recipe:", error);
-    throw new Error("Failed to generate recipe. Please try again.");
+    throw new Error("Failed to generate recipe. Please check your API key and try again.");
   }
 }
 

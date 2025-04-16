@@ -7,6 +7,7 @@ import { generateRecipe, handleNoApiKey, Recipe } from "@/services/geminiService
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cartStore";
 import { products } from "@/data/products";
+import { toast } from "sonner";
 
 interface RecipeAssistantProps {
   isOpen: boolean;
@@ -32,15 +33,22 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
     setError("");
     
     try {
-      // If you're using a real API key, use generateRecipe instead
-      // const generatedRecipe = await generateRecipe(dishName, servings);
-      
-      // For demo purposes, we'll use the fallback recipe
-      const generatedRecipe = await handleNoApiKey();
+      // Use the generateRecipe function with the API key
+      const generatedRecipe = await generateRecipe(dishName, servings);
       setRecipe(generatedRecipe);
+      toast.success("Recipe generated successfully!");
     } catch (err) {
-      setError("Failed to generate recipe. Please try again.");
-      console.error(err);
+      console.error("Error generating recipe:", err);
+      setError("Failed to generate recipe. Please check your API key and try again.");
+      
+      // Fallback to the demo recipe if the API call fails
+      try {
+        const fallbackRecipe = await handleNoApiKey();
+        setRecipe(fallbackRecipe);
+        toast.info("Using demo recipe. Please check your API key for real results.");
+      } catch (fallbackErr) {
+        console.error("Fallback error:", fallbackErr);
+      }
     } finally {
       setIsLoading(false);
     }
