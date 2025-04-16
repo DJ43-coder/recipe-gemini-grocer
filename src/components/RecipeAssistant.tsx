@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X, Clock, Users, ChefHat, Bookmark, ShoppingCart, Plus, CheckCircle, AlertCircle } from "lucide-react";
-import { generateRecipe, handleNoApiKey, Recipe, RecipeIngredient } from "@/services/geminiService";
+import { generateRecipe, handleNoApiKey, Recipe, RecipeIngredient, getIngredientImageUrl } from "@/services/geminiService";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cartStore";
 import { products } from "@/data/products";
@@ -82,7 +82,7 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
         id: `ing-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         name: ingredient.name,
         price: ingredient.price,
-        image: `https://source.unsplash.com/random/100x100/?${ingredient.name.toLowerCase().replace(/\s+/g, '-')}`,
+        image: getIngredientImageUrl(ingredient.name), // Use our new image function
         category: "Recipe Ingredients",
         unit: ingredient.quantity,
         popular: false
@@ -125,7 +125,7 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
     const recipeToSave = {
       ...recipe,
       id: Date.now().toString(),
-      imageUrl: `https://source.unsplash.com/random/300x200/?${recipe.name.toLowerCase().replace(/\s+/g, '-')}`
+      imageUrl: `https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=300&auto=format&fit=crop`
     };
     
     // Add the new recipe

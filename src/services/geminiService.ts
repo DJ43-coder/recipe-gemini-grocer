@@ -19,6 +19,7 @@ export interface RecipeIngredient {
 }
 
 export interface Recipe {
+  id?: string;  // Making id optional but available for type checking
   name: string;
   prepTime: string;
   difficulty: string;
@@ -26,6 +27,7 @@ export interface Recipe {
   ingredients: RecipeIngredient[];
   instructions: string[];
   totalPrice: number;
+  imageUrl?: string; // Adding optional imageUrl for saved recipes
 }
 
 export async function generateRecipe(dishName: string, servings: number): Promise<Recipe> {
@@ -166,6 +168,7 @@ function calculateIngredientPrice(name: string, quantity: string): number {
 export async function handleNoApiKey(): Promise<Recipe> {
   // Fallback recipe when API key is not available
   return {
+    id: "demo-recipe", // Add ID to match the expected type
     name: "Butter Chicken",
     prepTime: "30 mins + 25 mins",
     difficulty: "Medium",
@@ -186,6 +189,48 @@ export async function handleNoApiKey(): Promise<Recipe> {
       "Add marinated chicken and cook until done.",
       "Stir in cream and simmer for 5 minutes."
     ],
-    totalPrice: 450
+    totalPrice: 450,
+    imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=400" // Add a reliable image URL
   };
+}
+
+// Function to get reliable image URLs for ingredients
+export function getIngredientImageUrl(ingredientName: string): string {
+  const cleanName = ingredientName.toLowerCase().trim().replace(/\s+/g, '-');
+  
+  // Map common ingredients to reliable Unsplash image URLs
+  const imageMap: Record<string, string> = {
+    "chicken": "https://images.unsplash.com/photo-1587593810167-a84920ea0781?q=80&w=200",
+    "rice": "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?q=80&w=200",
+    "pasta": "https://images.unsplash.com/photo-1551462147-ff29053bfc14?q=80&w=200",
+    "tomato": "https://images.unsplash.com/photo-1561136594-7f68413baa99?q=80&w=200",
+    "onion": "https://images.unsplash.com/photo-1580201092675-a0a6a6cafbb1?q=80&w=200",
+    "garlic": "https://images.unsplash.com/photo-1615477550927-6ec413977e15?q=80&w=200",
+    "ginger": "https://images.unsplash.com/photo-1615485500704-8e990bab30ea?q=80&w=200",
+    "butter": "https://images.unsplash.com/photo-1589985270958-bf087efb3516?q=80&w=200",
+    "cheese": "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?q=80&w=200",
+    "milk": "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=200",
+    "cream": "https://images.unsplash.com/photo-1634076892554-b44ec00ceb9d?q=80&w=200",
+    "potato": "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=200",
+    "carrot": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=200",
+    "spinach": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?q=80&w=200",
+    "fish": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=200",
+    "egg": "https://images.unsplash.com/photo-1607690424560-35d967d6ad7c?q=80&w=200",
+    "olive-oil": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?q=80&w=200",
+    "lemon": "https://images.unsplash.com/photo-1582087463261-ddea03f80e5d?q=80&w=200",
+    "flour": "https://images.unsplash.com/photo-1546516071-47d8e2a592f4?q=80&w=200",
+    "sugar": "https://images.unsplash.com/photo-1563208276-13fee6108415?q=80&w=200",
+    "salt": "https://images.unsplash.com/photo-1610824771380-390c72f79f11?q=80&w=200",
+    "pepper": "https://images.unsplash.com/photo-1588165877827-d81654cb14f3?q=80&w=200"
+  };
+  
+  // Check if there's a direct match in our image map
+  for (const [key, url] of Object.entries(imageMap)) {
+    if (cleanName.includes(key)) {
+      return url;
+    }
+  }
+  
+  // If no match is found, use a dynamic Unsplash image with the ingredient name as search parameter
+  return `https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=200&auto=format&fit=crop`;
 }

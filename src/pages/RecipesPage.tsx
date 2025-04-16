@@ -8,7 +8,7 @@ import { ChatBot } from "@/components/ChatBot";
 import { useCartStore } from "@/store/cartStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Recipe, RecipeIngredient } from "@/services/geminiService";
+import { Recipe, RecipeIngredient, getIngredientImageUrl } from "@/services/geminiService";
 import { ArrowLeft, Plus, ExternalLink, CheckCircle, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -18,19 +18,25 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Form, FormField, FormItem, FormLabel, FormControl } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 
+// Define the saved recipe type with required id and imageUrl
+interface SavedRecipe extends Recipe {
+  id: string;
+  imageUrl: string;
+}
+
 const RecipesPage = () => {
   const navigate = useNavigate();
   const { isOpen: isCartOpen, addToCart } = useCartStore();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
-  const [savedRecipes, setSavedRecipes] = useState<Array<Recipe & { id: string, imageUrl: string }>>([
+  const [selectedRecipe, setSelectedRecipe] = useState<SavedRecipe | null>(null);
+  const [savedRecipes, setSavedRecipes] = useState<SavedRecipe[]>([
     {
       id: "1",
       name: "Butter Chicken",
       prepTime: "30 mins + 25 mins",
       difficulty: "Medium",
       servings: 4,
-      imageUrl: "https://source.unsplash.com/random/300x200/?butter-chicken",
+      imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=400",
       instructions: [
         "Marinate chicken with yogurt, ginger, garlic, and spices for 1 hour.",
         "In a pan, heat butter and cook onions until golden brown.",
@@ -55,7 +61,7 @@ const RecipesPage = () => {
       prepTime: "45 mins",
       difficulty: "Easy",
       servings: 4,
-      imageUrl: "https://source.unsplash.com/random/300x200/?paneer",
+      imageUrl: "https://images.unsplash.com/photo-1595295333158-4742f28fbd85?q=80&w=400",
       instructions: [
         "Blanch spinach leaves in hot water for 2-3 minutes.",
         "Blend the blanched spinach to make a puree.",
@@ -81,7 +87,7 @@ const RecipesPage = () => {
       prepTime: "60 mins",
       difficulty: "Medium",
       servings: 6,
-      imageUrl: "https://source.unsplash.com/random/300x200/?biryani",
+      imageUrl: "https://images.unsplash.com/photo-1633945274405-b8f2b8b0b3b3?q=80&w=400",
       instructions: [
         "Soak basmati rice for 30 minutes, then partially cook it.",
         "In a separate pot, sauté onions until golden brown.",
@@ -131,10 +137,10 @@ const RecipesPage = () => {
   }, []);
   
   const saveRecipe = (recipe: Recipe) => {
-    const recipeWithId = {
+    const recipeWithId: SavedRecipe = {
       ...recipe,
       id: Date.now().toString(),
-      imageUrl: `https://source.unsplash.com/random/300x200/?${recipe.name.toLowerCase().replace(/\s+/g, '-')}`
+      imageUrl: `https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=300&auto=format&fit=crop`
     };
     
     const updatedRecipes = [...savedRecipes, recipeWithId];
@@ -145,7 +151,7 @@ const RecipesPage = () => {
     toast.success("Recipe saved successfully!");
   };
   
-  const handleViewRecipe = (recipe: typeof savedRecipes[0]) => {
+  const handleViewRecipe = (recipe: SavedRecipe) => {
     setSelectedRecipe(recipe);
   };
   
@@ -175,7 +181,7 @@ const RecipesPage = () => {
         id: `ing-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         name: ingredient.name,
         price: ingredient.price,
-        image: `https://source.unsplash.com/random/100x100/?${ingredient.name.toLowerCase().replace(/\s+/g, '-')}`,
+        image: getIngredientImageUrl(ingredient.name), // Use our new image function
         category: "Recipe Ingredients",
         unit: ingredient.quantity,
         popular: false
@@ -196,10 +202,12 @@ const RecipesPage = () => {
   
   const openAddIngredientDialog = (index: number | null = null) => {
     setCurrentIngredientIndex(index);
+    if (!selectedRecipe) return;
+    
     form.reset({ 
-      ingredientName: index !== null && selectedRecipe ? selectedRecipe.ingredients[index].name : "",
-      quantity: index !== null && selectedRecipe ? selectedRecipe.ingredients[index].quantity : "",
-      price: index !== null && selectedRecipe ? selectedRecipe.ingredients[index].price : 0
+      ingredientName: index !== null ? selectedRecipe.ingredients[index].name : "",
+      quantity: index !== null ? selectedRecipe.ingredients[index].quantity : "",
+      price: index !== null ? selectedRecipe.ingredients[index].price : 0
     });
     setIsAddIngredientDialogOpen(true);
   };
