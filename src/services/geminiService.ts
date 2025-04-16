@@ -1,12 +1,12 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// This is a placeholder API key - users should replace it with their own
-const API_KEY = "YOUR_GEMINI_API_KEY"; 
+// Use the provided API key
+const API_KEY = "AIzaSyD-dbOMgzALwH8mXvUvOJPLXjLElMTcQAU"; 
 
 // Initialize the Gemini API
 const getGenAI = () => {
-  if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY") {
+  if (!API_KEY) {
     throw new Error("Please set your Gemini API key in geminiService.ts");
   }
   return new GoogleGenerativeAI(API_KEY);
@@ -31,7 +31,8 @@ export interface Recipe {
 export async function generateRecipe(dishName: string, servings: number): Promise<Recipe> {
   try {
     const genAI = getGenAI();
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    // Use the gemini-2.0-flash model as specified
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     
     const prompt = `
       Generate a detailed recipe for ${dishName} that serves ${servings} people.
@@ -59,6 +60,8 @@ export async function generateRecipe(dishName: string, servings: number): Promis
     const response = await result.response;
     const text = response.text();
     
+    console.log("Raw Gemini response:", text);
+    
     // Extract JSON from the response
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     
@@ -85,7 +88,7 @@ export async function generateRecipe(dishName: string, servings: number): Promis
     
   } catch (error) {
     console.error("Error generating recipe:", error);
-    throw new Error("Failed to generate recipe. Please check your API key and try again.");
+    throw new Error(`Failed to generate recipe: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }
 

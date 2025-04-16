@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cartStore";
 import { products } from "@/data/products";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface RecipeAssistantProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ interface RecipeAssistantProps {
 }
 
 export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
+  const navigate = useNavigate();
   const [dishName, setDishName] = useState("");
   const [servings, setServings] = useState(4);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -33,13 +35,13 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
     setError("");
     
     try {
-      // Use the generateRecipe function with the API key
+      // Use the generateRecipe function with the updated API key and model
       const generatedRecipe = await generateRecipe(dishName, servings);
       setRecipe(generatedRecipe);
       toast.success("Recipe generated successfully!");
     } catch (err) {
       console.error("Error generating recipe:", err);
-      setError("Failed to generate recipe. Please check your API key and try again.");
+      setError(`Failed to generate recipe: ${err instanceof Error ? err.message : 'Unknown error'}`);
       
       // Fallback to the demo recipe if the API call fails
       try {
@@ -65,11 +67,59 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
       
       if (matchingProduct) {
         addToCart(matchingProduct);
+      } else {
+        // Create a product from the ingredient
+        const newProduct = {
+          id: `ing-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+          name: ingredient.name,
+          price: ingredient.price,
+          image: `https://source.unsplash.com/random/100x100/?${ingredient.name.toLowerCase().replace(/\s+/g, '-')}`,
+          category: "Recipe Ingredients",
+          unit: ingredient.quantity,
+          popular: false
+        };
+        addToCart(newProduct);
       }
     });
     
+    toast.success("All ingredients added to cart!");
     // Close the recipe assistant
     onClose();
+  };
+  
+  const handleSaveRecipe = () => {
+    if (!recipe) return;
+    
+    // Get existing saved recipes
+    const existingRecipesJson = localStorage.getItem('savedRecipes');
+    let existingRecipes = [];
+    
+    if (existingRecipesJson) {
+      try {
+        existingRecipes = JSON.parse(existingRecipesJson);
+      } catch (e) {
+        console.error("Failed to parse saved recipes:", e);
+      }
+    }
+    
+    // Create a new recipe object with an ID and image
+    const recipeToSave = {
+      ...recipe,
+      id: Date.now().toString(),
+      imageUrl: `https://source.unsplash.com/random/300x200/?${recipe.name.toLowerCase().replace(/\s+/g, '-')}`
+    };
+    
+    // Add the new recipe
+    const updatedRecipes = [...existingRecipes, recipeToSave];
+    
+    // Save to localStorage
+    localStorage.setItem('savedRecipes', JSON.stringify(updatedRecipes));
+    
+    toast.success("Recipe saved successfully!");
+    
+    // Optionally navigate to recipes page
+    onClose();
+    navigate('/recipes');
   };
   
   if (!isOpen) return null;
@@ -182,6 +232,7 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
                 <Button 
                   variant="outline"
                   className="flex-1"
+                  onClick={handleSaveRecipe}
                 >
                   <Bookmark className="h-4 w-4 mr-2" />
                   Save Recipe
