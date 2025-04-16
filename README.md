@@ -1,73 +1,42 @@
-# Welcome to your Lovable project
 
-## Project info
+# GroceryScout
 
-**URL**: https://lovable.dev/projects/afecc1d3-2b93-444a-8f0a-a2116f75a2e2
+An AI-powered grocery shopping website that helps users discover recipes and ingredients.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Browse grocery products by category
+- Search functionality for finding specific products
+- AI-powered recipe assistant (powered by Gemini)
+- Shopping cart functionality
+- Responsive design for all device sizes
+- Recipe saving capabilities
 
-**Use Lovable**
+## Technologies Used
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/afecc1d3-2b93-444a-8f0a-a2116f75a2e2) and start prompting.
+- React with TypeScript
+- Tailwind CSS for styling
+- Shadcn UI components
+- Zustand for state management
+- Gemini API for AI-powered recipe generation
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Update the Gemini API key in `src/services/geminiService.ts`
+4. Run `npm run dev` to start the development server
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## AI Recipe Assistant
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The application features an AI-powered recipe assistant that can generate recipes based on user input. The recipe assistant can:
 
-Follow these steps:
+- Generate recipes based on dish name and number of servings
+- Display ingredients with quantities and estimated prices
+- Provide step-by-step cooking instructions
+- Allow adding all ingredients to the shopping cart
+- Save recipes for future reference
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## License
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/afecc1d3-2b93-444a-8f0a-a2116f75a2e2) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the MIT License.
