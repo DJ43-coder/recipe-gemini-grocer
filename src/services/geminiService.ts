@@ -54,6 +54,10 @@ export async function generateRecipe(dishName: string, servings: number): Promis
       }
       
       Only include the JSON in your response, no other text.
+      Be specific with ingredient names.
+      Be precise with quantities.
+      Provide detailed cooking steps.
+      Include all necessary ingredients for the recipe.
     `;
 
     const result = await model.generateContent(prompt);
@@ -71,10 +75,10 @@ export async function generateRecipe(dishName: string, servings: number): Promis
     
     const recipeData = JSON.parse(jsonMatch[0]);
     
-    // Assign random prices to ingredients
+    // Assign prices to ingredients based on realistic values
     const ingredients = recipeData.ingredients.map((ingredient: any) => ({
       ...ingredient,
-      price: Math.floor(Math.random() * 100) + 20 // Random price between 20-120
+      price: calculateIngredientPrice(ingredient.name, ingredient.quantity)
     }));
     
     // Calculate total price
@@ -90,6 +94,73 @@ export async function generateRecipe(dishName: string, servings: number): Promis
     console.error("Error generating recipe:", error);
     throw new Error(`Failed to generate recipe: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
+}
+
+// Helper function to calculate more realistic prices based on ingredient name and quantity
+function calculateIngredientPrice(name: string, quantity: string): number {
+  // Base price range between 20-150
+  let basePrice = Math.floor(Math.random() * 130) + 20;
+  
+  // Adjust price based on common ingredient types
+  const lowerName = name.toLowerCase();
+  
+  // Premium ingredients
+  if (
+    lowerName.includes("saffron") || 
+    lowerName.includes("truffle") || 
+    lowerName.includes("lobster") || 
+    lowerName.includes("caviar")
+  ) {
+    basePrice += 500;
+  }
+  // Meat and seafood
+  else if (
+    lowerName.includes("chicken") || 
+    lowerName.includes("mutton") || 
+    lowerName.includes("beef") || 
+    lowerName.includes("fish") || 
+    lowerName.includes("prawn") || 
+    lowerName.includes("pork")
+  ) {
+    basePrice += 150;
+  }
+  // Dairy and cheese
+  else if (
+    lowerName.includes("cheese") || 
+    lowerName.includes("cream") || 
+    lowerName.includes("butter") || 
+    lowerName.includes("milk")
+  ) {
+    basePrice += 50;
+  }
+  // Nuts and dry fruits
+  else if (
+    lowerName.includes("cashew") || 
+    lowerName.includes("almond") || 
+    lowerName.includes("walnut") || 
+    lowerName.includes("pistachio")
+  ) {
+    basePrice += 200;
+  }
+  // Common vegetables and spices are left at base price
+  
+  // Adjust for quantity
+  const qtyLower = quantity.toLowerCase();
+  if (qtyLower.includes("kg") || qtyLower.includes("kilo")) {
+    basePrice *= 2;
+  } else if (qtyLower.includes("g") || qtyLower.includes("gram")) {
+    const grams = parseInt(quantity);
+    if (!isNaN(grams) && grams > 500) {
+      basePrice *= 1.5;
+    } else if (!isNaN(grams) && grams < 50) {
+      basePrice = Math.max(10, basePrice / 3);
+    }
+  } else if (qtyLower.includes("tbsp") || qtyLower.includes("tablespoon") || qtyLower.includes("tsp") || qtyLower.includes("teaspoon")) {
+    basePrice = Math.max(10, basePrice / 5);
+  }
+  
+  // Round to nearest 5
+  return Math.ceil(basePrice / 5) * 5;
 }
 
 export async function handleNoApiKey(): Promise<Recipe> {

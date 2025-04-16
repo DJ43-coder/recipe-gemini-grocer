@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -8,10 +9,14 @@ import { useCartStore } from "@/store/cartStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Recipe, RecipeIngredient } from "@/services/geminiService";
-import { ArrowLeft, Plus, ExternalLink } from "lucide-react";
+import { ArrowLeft, Plus, ExternalLink, CheckCircle, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import { products } from "@/data/products";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { Form, FormField, FormItem, FormLabel, FormControl } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
 
 const RecipesPage = () => {
   const navigate = useNavigate();
@@ -98,6 +103,17 @@ const RecipesPage = () => {
     }
   ]);
   
+  const [isAddIngredientDialogOpen, setIsAddIngredientDialogOpen] = useState(false);
+  const [currentIngredientIndex, setCurrentIngredientIndex] = useState<number | null>(null);
+  
+  const form = useForm({
+    defaultValues: {
+      ingredientName: "",
+      quantity: "",
+      price: 0
+    }
+  });
+  
   useEffect(() => {
     const storedRecipes = localStorage.getItem('savedRecipes');
     if (storedRecipes) {
@@ -133,19 +149,41 @@ const RecipesPage = () => {
     setSelectedRecipe(recipe);
   };
   
+  const isIngredientAvailable = (ingredientName: string): boolean => {
+    return products.some(product => 
+      product.name.toLowerCase().includes(ingredientName.toLowerCase()) ||
+      ingredientName.toLowerCase().includes(product.name.toLowerCase())
+    );
+  };
+  
+  const findMatchingProduct = (ingredientName: string) => {
+    return products.find(product => 
+      product.name.toLowerCase().includes(ingredientName.toLowerCase()) ||
+      ingredientName.toLowerCase().includes(product.name.toLowerCase())
+    );
+  };
+  
   const handleAddIngredientToCart = (ingredient: RecipeIngredient) => {
-    const product = {
-      id: `ing-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
-      name: ingredient.name,
-      price: ingredient.price,
-      image: `https://source.unsplash.com/random/100x100/?${ingredient.name.toLowerCase().replace(/\s+/g, '-')}`,
-      category: "Recipe Ingredients",
-      unit: ingredient.quantity,
-      popular: false
-    };
+    const matchingProduct = findMatchingProduct(ingredient.name);
     
-    addToCart(product);
-    toast.success(`Added ${ingredient.name} to cart`);
+    if (matchingProduct) {
+      addToCart(matchingProduct);
+      toast.success(`Added ${matchingProduct.name} to cart`);
+    } else {
+      // Create a custom product from the ingredient
+      const product = {
+        id: `ing-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+        name: ingredient.name,
+        price: ingredient.price,
+        image: `https://source.unsplash.com/random/100x100/?${ingredient.name.toLowerCase().replace(/\s+/g, '-')}`,
+        category: "Recipe Ingredients",
+        unit: ingredient.quantity,
+        popular: false
+      };
+      
+      addToCart(product);
+      toast.success(`Added ${ingredient.name} to cart`);
+    }
   };
   
   const handleAddAllIngredientsToCart = (ingredients: RecipeIngredient[]) => {
@@ -154,6 +192,65 @@ const RecipesPage = () => {
     });
     
     toast.success("All ingredients added to cart");
+  };
+  
+  const openAddIngredientDialog = (index: number | null = null) => {
+    setCurrentIngredientIndex(index);
+    form.reset({ 
+      ingredientName: index !== null && selectedRecipe ? selectedRecipe.ingredients[index].name : "",
+      quantity: index !== null && selectedRecipe ? selectedRecipe.ingredients[index].quantity : "",
+      price: index !== null && selectedRecipe ? selectedRecipe.ingredients[index].price : 0
+    });
+    setIsAddIngredientDialogOpen(true);
+  };
+  
+  const handleAddCustomIngredient = (data: { ingredientName: string, quantity: string, price: number }) => {
+    if (!selectedRecipe) return;
+    
+    const newIngredient: RecipeIngredient = {
+      name: data.ingredientName,
+      quantity: data.quantity,
+      price: data.price
+    };
+    
+    let updatedIngredients;
+    
+    if (currentIngredientIndex !== null) {
+      // Edit existing ingredient
+      updatedIngredients = [...selectedRecipe.ingredients];
+      updatedIngredients[currentIngredientIndex] = newIngredient;
+    } else {
+      // Add new ingredient
+      updatedIngredients = [...selectedRecipe.ingredients, newIngredient];
+    }
+    
+    // Calculate new total price
+    const newTotalPrice = updatedIngredients.reduce((total, ing) => total + ing.price, 0);
+    
+    const updatedRecipe = {
+      ...selectedRecipe,
+      ingredients: updatedIngredients,
+      totalPrice: newTotalPrice
+    };
+    
+    setSelectedRecipe(updatedRecipe);
+    
+    // Update saved recipes if this is a saved recipe
+    const savedRecipeIndex = savedRecipes.findIndex(r => r.id === selectedRecipe.id);
+    if (savedRecipeIndex !== -1) {
+      const updatedSavedRecipes = [...savedRecipes];
+      updatedSavedRecipes[savedRecipeIndex] = {
+        ...updatedRecipe,
+        id: selectedRecipe.id,
+        imageUrl: updatedSavedRecipes[savedRecipeIndex].imageUrl
+      };
+      
+      setSavedRecipes(updatedSavedRecipes);
+      localStorage.setItem('savedRecipes', JSON.stringify(updatedSavedRecipes));
+    }
+    
+    setIsAddIngredientDialogOpen(false);
+    toast.success(currentIngredientIndex !== null ? "Ingredient updated" : "Ingredient added");
   };
   
   const filteredRecipes = savedRecipes.filter(
@@ -240,7 +337,7 @@ const RecipesPage = () => {
           <TabsContent value="view">
             {selectedRecipe ? (
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <div className="flex justify-between items-start mb-6">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
                   <div>
                     <h2 className="text-2xl font-bold mb-2">{selectedRecipe.name}</h2>
                     <div className="flex flex-wrap gap-3">
@@ -249,37 +346,73 @@ const RecipesPage = () => {
                       <span className="bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700">Serves {selectedRecipe.servings}</span>
                     </div>
                   </div>
-                  <Button 
-                    className="bg-green-500 hover:bg-green-600 text-white"
-                    onClick={() => handleAddAllIngredientsToCart(selectedRecipe.ingredients)}
-                  >
-                    Add All Ingredients to Cart
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button 
+                      className="bg-green-500 hover:bg-green-600 text-white"
+                      onClick={() => handleAddAllIngredientsToCart(selectedRecipe.ingredients)}
+                    >
+                      Add All to Cart
+                    </Button>
+                  </div>
                 </div>
                 
                 <div className="md:flex gap-8">
                   <div className="md:w-1/2 mb-6 md:mb-0">
-                    <h3 className="text-xl font-semibold mb-4">Ingredients</h3>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-semibold">Ingredients</h3>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => openAddIngredientDialog()}
+                      >
+                        <Plus className="h-4 w-4 mr-2" />
+                        Add Ingredient
+                      </Button>
+                    </div>
                     <div className="space-y-3">
-                      {selectedRecipe.ingredients.map((ingredient, idx) => (
-                        <div key={idx} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                          <div>
-                            <span className="font-medium">{ingredient.name}</span>
-                            <span className="text-sm text-gray-500 ml-2">({ingredient.quantity})</span>
+                      {selectedRecipe.ingredients.map((ingredient, idx) => {
+                        const isAvailable = isIngredientAvailable(ingredient.name);
+                        return (
+                          <div 
+                            key={idx} 
+                            className={`flex justify-between items-center p-2 rounded ${isAvailable ? 'bg-gray-50' : 'bg-gray-100'}`}
+                          >
+                            <div className="flex items-center">
+                              {isAvailable ? (
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                              ) : (
+                                <AlertCircle className="h-4 w-4 text-gray-400 mr-2" />
+                              )}
+                              <div>
+                                <span className={`font-medium ${!isAvailable ? 'text-gray-500' : ''}`}>{ingredient.name}</span>
+                                <span className="text-sm text-gray-500 ml-2">({ingredient.quantity})</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <span className={`font-medium ${isAvailable ? 'text-green-600' : 'text-gray-500'}`}>₹{ingredient.price}</span>
+                              <div className="flex items-center">
+                                <Button 
+                                  size="sm" 
+                                  variant="ghost"
+                                  className="h-8 w-8 p-0"
+                                  onClick={() => openAddIngredientDialog(idx)}
+                                >
+                                  <ExternalLink className="h-3 w-3" />
+                                </Button>
+                                <Button 
+                                  size="sm" 
+                                  variant="ghost"
+                                  className="h-8 w-8 p-0"
+                                  onClick={() => handleAddIngredientToCart(ingredient)}
+                                  disabled={!isAvailable}
+                                >
+                                  <Plus className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <span className="text-green-600 font-medium">₹{ingredient.price}</span>
-                            <Button 
-                              size="sm" 
-                              variant="ghost"
-                              className="h-8 w-8 p-0"
-                              onClick={() => handleAddIngredientToCart(ingredient)}
-                            >
-                              <Plus className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                     <div className="mt-4 flex justify-between items-center p-3 bg-green-50 rounded">
                       <span className="font-semibold">Total Cost</span>
@@ -302,7 +435,12 @@ const RecipesPage = () => {
                 <p className="text-gray-500 mb-4">Select a recipe to view details</p>
                 <Button 
                   className="bg-green-500 hover:bg-green-600 text-white"
-                  onClick={() => document.querySelector('[data-value="saved"]')?.click()}
+                  onClick={() => {
+                    const savedTab = document.querySelector('[data-value="saved"]');
+                    if (savedTab) {
+                      (savedTab as HTMLElement).click();
+                    }
+                  }}
                 >
                   Browse Recipes
                 </Button>
@@ -319,6 +457,81 @@ const RecipesPage = () => {
       <RecipeButton />
       
       <ChatBot />
+      
+      <Dialog open={isAddIngredientDialogOpen} onOpenChange={setIsAddIngredientDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{currentIngredientIndex !== null ? "Edit Ingredient" : "Add Custom Ingredient"}</DialogTitle>
+            <DialogDescription>
+              {currentIngredientIndex !== null ? 
+                "Modify the ingredient details below." : 
+                "Add a custom ingredient to your recipe."}
+            </DialogDescription>
+          </DialogHeader>
+          
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleAddCustomIngredient)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="ingredientName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Ingredient Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="e.g. Olive Oil" />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="quantity"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Quantity</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="e.g. 2 tbsp" />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Price (₹)</FormLabel>
+                    <FormControl>
+                      <Input 
+                        {...field} 
+                        type="number" 
+                        min="0"
+                        step="1"
+                        onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              
+              <DialogFooter>
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={() => setIsAddIngredientDialogOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white">
+                  {currentIngredientIndex !== null ? "Update" : "Add"}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

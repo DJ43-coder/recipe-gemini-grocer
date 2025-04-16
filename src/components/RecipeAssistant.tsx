@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X, Clock, Users, ChefHat, Bookmark, ShoppingCart } from "lucide-react";
-import { generateRecipe, handleNoApiKey, Recipe } from "@/services/geminiService";
+import { X, Clock, Users, ChefHat, Bookmark, ShoppingCart, Plus, CheckCircle, AlertCircle } from "lucide-react";
+import { generateRecipe, handleNoApiKey, Recipe, RecipeIngredient } from "@/services/geminiService";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cartStore";
 import { products } from "@/data/products";
@@ -56,30 +56,49 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
     }
   };
   
+  const isIngredientAvailable = (ingredientName: string): boolean => {
+    return products.some(product => 
+      product.name.toLowerCase().includes(ingredientName.toLowerCase()) ||
+      ingredientName.toLowerCase().includes(product.name.toLowerCase())
+    );
+  };
+  
+  const findMatchingProduct = (ingredientName: string) => {
+    return products.find(product => 
+      product.name.toLowerCase().includes(ingredientName.toLowerCase()) ||
+      ingredientName.toLowerCase().includes(product.name.toLowerCase())
+    );
+  };
+  
+  const handleAddIngredientToCart = (ingredient: RecipeIngredient) => {
+    const matchingProduct = findMatchingProduct(ingredient.name);
+    
+    if (matchingProduct) {
+      addToCart(matchingProduct);
+      toast.success(`Added ${matchingProduct.name} to cart`);
+    } else {
+      // Create a custom product from the ingredient
+      const product = {
+        id: `ing-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+        name: ingredient.name,
+        price: ingredient.price,
+        image: `https://source.unsplash.com/random/100x100/?${ingredient.name.toLowerCase().replace(/\s+/g, '-')}`,
+        category: "Recipe Ingredients",
+        unit: ingredient.quantity,
+        popular: false
+      };
+      
+      addToCart(product);
+      toast.success(`Added ${ingredient.name} to cart (custom ingredient)`);
+    }
+  };
+  
   const handleAddAllIngredients = () => {
     if (!recipe) return;
     
-    // Find matching products in the store and add them to cart
+    // Add all ingredients to cart
     recipe.ingredients.forEach(ingredient => {
-      const matchingProduct = products.find(p => 
-        p.name.toLowerCase().includes(ingredient.name.toLowerCase())
-      );
-      
-      if (matchingProduct) {
-        addToCart(matchingProduct);
-      } else {
-        // Create a product from the ingredient
-        const newProduct = {
-          id: `ing-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
-          name: ingredient.name,
-          price: ingredient.price,
-          image: `https://source.unsplash.com/random/100x100/?${ingredient.name.toLowerCase().replace(/\s+/g, '-')}`,
-          category: "Recipe Ingredients",
-          unit: ingredient.quantity,
-          popular: false
-        };
-        addToCart(newProduct);
-      }
+      handleAddIngredientToCart(ingredient);
     });
     
     toast.success("All ingredients added to cart!");
@@ -198,15 +217,38 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
               
               <h3 className="text-xl font-semibold mb-4">Ingredients (₹{recipe.totalPrice.toFixed(2)})</h3>
               <div className="space-y-3 mb-6">
-                {recipe.ingredients.map((ingredient, index) => (
-                  <div key={index} className="flex justify-between items-center">
-                    <span className="text-gray-800">{ingredient.name}</span>
-                    <div className="flex items-center">
-                      <span className="text-gray-600 mr-4">{ingredient.quantity}</span>
-                      <span className="text-green-600 font-semibold w-20 text-right">₹{ingredient.price.toFixed(2)}</span>
+                {recipe.ingredients.map((ingredient, index) => {
+                  const isAvailable = isIngredientAvailable(ingredient.name);
+                  return (
+                    <div key={index} className="flex justify-between items-center">
+                      <div className="flex items-center">
+                        {isAvailable ? (
+                          <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        ) : (
+                          <AlertCircle className="h-4 w-4 text-gray-400 mr-2" />
+                        )}
+                        <span className={`text-gray-800 ${!isAvailable ? 'text-gray-500' : ''}`}>
+                          {ingredient.name}
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <span className="text-gray-600 mr-4">{ingredient.quantity}</span>
+                        <span className={`font-semibold w-20 text-right ${isAvailable ? 'text-green-600' : 'text-gray-500'}`}>
+                          ₹{ingredient.price.toFixed(2)}
+                        </span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost"
+                          className="ml-2 p-0 h-8 w-8"
+                          onClick={() => handleAddIngredientToCart(ingredient)}
+                          disabled={!isAvailable}
+                        >
+                          <Plus className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               
               <Separator className="my-6" />
