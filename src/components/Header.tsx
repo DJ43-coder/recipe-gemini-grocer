@@ -1,14 +1,16 @@
-
-import { ShoppingCart, Search, MapPin } from "lucide-react";
+import { MapPin, Search, ShoppingCart } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useProductStore } from "@/store/productStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useLocation } from "@/hooks/useLocation";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function Header() {
   const { openCart, getTotalItems } = useCartStore();
   const { searchQuery, setSearchQuery } = useProductStore();
   const cartItemCount = getTotalItems();
+  const { address, loading, error } = useLocation();
   
   return (
     <header className="bg-white p-4 shadow-sm">
@@ -37,8 +39,18 @@ export function Header() {
           </div>
           
           <div className="flex items-center space-x-2 text-gray-700">
-            <MapPin size={18} className="text-green-500" />
-            <span className="hidden md:inline">Mumbai</span>
+            <MapPin size={18} className="text-green-500 flex-shrink-0" />
+            <div className="max-w-[200px] truncate">
+              {loading ? (
+                <Skeleton className="h-4 w-[150px]" />
+              ) : error ? (
+                <span className="text-sm text-red-500">Location unavailable</span>
+              ) : (
+                <span className="text-sm" title={address}>
+                  {address}
+                </span>
+              )}
+            </div>
           </div>
           
           <Button 
