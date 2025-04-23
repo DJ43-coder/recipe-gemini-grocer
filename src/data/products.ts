@@ -15,7 +15,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 40.00,
     unit: "kg",
-    image: "/lovable-uploads/e7562586-56fb-4b70-9798-6b4859961b89.png"
+    image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/plant-seed/l/l/i/50-f1-hybrid-tomato-sachriya-haritkarni-original-imaggmqgcvjja3qt.jpeg?q=90&crop=false"
   },
   {
     id: "2",
@@ -23,7 +23,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 30.00,
     unit: "kg",
-    image: "/lovable-uploads/e2372449-59c9-4c1f-a292-15da93e1f45f.png"
+    image: "https://5.imimg.com/data5/ANDROID/Default/2023/12/372380354/GT/DS/XN/203110273/prod-20231228-1957273905166265564667309-jpg-250x250.jpg"
   },
   {
     id: "3",
@@ -31,7 +31,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 25.00,
     unit: "kg",
-    image: "/lovable-uploads/f80a3b4d-e2fc-4cee-9902-c07fa513aadf.png"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/498183581/ZF/XZ/EM/9687089/sugar-free-potato-250x250.jpg"
   },
   {
     id: "4",
@@ -39,7 +39,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 55.00,
     unit: "100g",
-    image: "/lovable-uploads/01d45f20-f168-4a58-83d7-ffda01cc1c20.png"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/3/398970717/CG/RZ/FY/78034159/green-cotton-fabric-250x250.jpg"
   },
   {
     id: "5",
@@ -47,15 +47,15 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 80.00,
     unit: "200g",
-    image: "/lovable-uploads/15cfd47f-7a06-4c0f-b47f-a9d6ace8f0de.png"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/11/465083665/LD/LU/OX/114364635/full-cream-paneer-250x250.jpg"
   },
   {
     id: "6",
     name: "Amul Milk",
     category: "Dairy & Eggs",
     price: 60.00,
-    unit: "1L",
-    image: "/lovable-uploads/e39d7000-4aea-4e2e-a7df-f30d3d6f0355.png"
+    unit: "0.5L",
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/10/455616872/LH/UI/YD/40096212/amul-milk-250x250.png"
   },
   {
     id: "7",
@@ -63,7 +63,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 45.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/300x200/?turmeric"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/9/342127916/CO/MC/ND/9013366/turmeric-powder-organic-250x250.jpeg"
   },
   {
     id: "8",
@@ -71,7 +71,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 50.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/300x200/?chilli"
+    image: "http://5.imimg.com/data5/SELLER/Default/2023/9/342152106/PX/ZN/TN/9013366/kashmiri-chilli-powder-1000x1000.jpeg"
   },
   {
     id: "9",
@@ -79,7 +79,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 65.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/300x200/?spice"
+    image: "http://5.imimg.com/data5/UM/EL/HM/SELLER-1998375/garam-masala-500x500.jpg"
   },
   {
     id: "10",
@@ -87,7 +87,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 120.00,
     unit: "kg",
-    image: "https://source.unsplash.com/random/300x200/?rice"
+    image: "https://5.imimg.com/data5/ANDROID/Default/2025/4/500864459/JZ/WH/NA/5667603/product-jpeg-250x250.jpg"
   },
   {
     id: "11",
@@ -95,7 +95,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 110.00,
     unit: "kg",
-    image: "https://source.unsplash.com/random/300x200/?lentils"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/2/485825768/CJ/IB/KY/189429300/toor-dal-third-quality-250x250.jpg"
   },
   {
     id: "12",
@@ -103,7 +103,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 45.00,
     unit: "kg",
-    image: "https://source.unsplash.com/random/300x200/?flour"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/4/503277453/TE/ER/DB/144175282/aashirvaad-wheat-flour-250x250.jpg"
   },
   {
     id: "13",
@@ -111,7 +111,7 @@ export const products: Product[] = [
     category: "Snacks",
     price: 30.00,
     unit: "pack",
-    image: "https://source.unsplash.com/random/300x200/?chips"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/12/476544500/VD/KS/YP/236698204/lays-hot-sweet-250x250.jpg"
   },
   {
     id: "14",
@@ -119,7 +119,7 @@ export const products: Product[] = [
     category: "Snacks",
     price: 25.00,
     unit: "pack",
-    image: "https://source.unsplash.com/random/300x200/?cookies"
+    image: "https://5.imimg.com/data5/ANDROID/Default/2025/1/484339569/VQ/TA/MP/10491252/product-jpeg-250x250.jpg"
   },
   {
     id: "15",
@@ -127,7 +127,7 @@ export const products: Product[] = [
     category: "Snacks",
     price: 55.00,
     unit: "200g",
-    image: "https://source.unsplash.com/random/300x200/?snack"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/4/503185329/RK/XJ/QD/23743223/aloo-bhujia-namkeen-250x250.jpg"
   },
   {
     id: "16",
@@ -135,7 +135,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 70.00,
     unit: "200ml",
-    image: "https://source.unsplash.com/random/300x200/?cream"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/5/422981260/KR/GO/QC/114700609/454-250x250.jpeg"
   },
   {
     id: "17",
@@ -143,7 +143,7 @@ export const products: Product[] = [
     category: "Meat & Seafood",
     price: 150.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/300x200/?chicken"
+    image: "https://5.imimg.com/data5/SELLER/Default/2022/5/HU/KL/LH/129229669/smoked-chicken-breast-nature-s-soul-500gm-250x250.jpg"
   },
   {
     id: "18",
@@ -151,7 +151,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 50.00,
     unit: "200g",
-    image: "https://source.unsplash.com/random/300x200/?tomato-puree"
+    image: "https://5.imimg.com/data5/SELLER/Default/2022/11/OS/QD/LC/4856313/kissan-tomato-puree-1kg-2-250x250.jpg"
   },
   {
     id: "19",
@@ -159,7 +159,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 40.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/300x200/?garlic"
+    image: "https://5.imimg.com/data5/SELLER/PDFImage/2024/4/411635140/UB/MP/BX/142731192/garlic-paste-250x250.png"
   },
   {
     id: "20",
@@ -167,7 +167,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 40.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/300x200/?ginger"
+    image: "https://5.imimg.com/data5/ANDROID/Default/2023/10/355294824/UO/XE/JW/23057836/product-jpeg-250x250.jpeg"
   },
   {
     id: "21",
@@ -175,7 +175,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 60.00,
     unit: "250g",
-    image: "https://source.unsplash.com/random/100x100/?bell-peppers"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/11/363575002/WL/YJ/WN/198633145/70-250x250.png"
   },
   {
     id: "22",
@@ -183,7 +183,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 35.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?carrots"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/2/389034571/MY/RR/UQ/123355379/carrot-250x250.jpg"
   },
   {
     id: "23",
@@ -191,7 +191,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 20.00,
     unit: "piece",
-    image: "https://source.unsplash.com/random/100x100/?cucumber"
+    image: "https://5.imimg.com/data5/SELLER/Default/2022/9/TJ/EE/QO/159921501/cocumber-250x250.jpg"
   },
   {
     id: "24",
@@ -199,7 +199,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 40.00,
     unit: "head",
-    image: "https://source.unsplash.com/random/100x100/?cauliflower"
+    image: "https://5.imimg.com/data5/SELLER/Default/2022/6/HS/RP/UA/83716376/1-250x250.png"
   },
   {
     id: "25",
@@ -207,7 +207,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 50.00,
     unit: "head",
-    image: "https://source.unsplash.com/random/100x100/?broccoli"
+    image: "https://5.imimg.com/data5/ANDROID/Default/2020/9/HY/WW/LJ/79520663/product-jpeg-250x250.jpg"
   },
   {
     id: "26",
@@ -215,7 +215,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 30.00,
     unit: "bunch",
-    image: "https://source.unsplash.com/random/100x100/?spinach"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/10/460949905/TS/CU/LH/65797831/fresh-spinach-leaves-250x250.jpg"
   },
   {
     id: "27",
@@ -223,7 +223,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 15.00,
     unit: "bunch",
-    image: "https://source.unsplash.com/random/100x100/?coriander"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/494815116/LS/NY/RK/124394901/fresh-green-coriander-leaves-250x250.jpeg"
   },
   {
     id: "28",
@@ -231,7 +231,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 15.00,
     unit: "bunch",
-    image: "https://source.unsplash.com/random/100x100/?mint"
+    image: "https://3.imimg.com/data3/UY/AL/GLADMIN-9150/herb-leaves-125x125.jpg"
   },
   {
     id: "29",
@@ -239,7 +239,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 10.00,
     unit: "50g",
-    image: "https://source.unsplash.com/random/100x100/?green-chillies"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/493841034/WB/EC/BE/96606494/fresh-green-chilli-250x250.png"
   },
   {
     id: "30",
@@ -247,7 +247,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 20.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?lemons"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/8/441636265/EY/AM/GF/226952059/lemon-250x250.jpg"
   },
   {
     id: "31",
@@ -255,7 +255,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 180.00,
     unit: "kg",
-    image: "https://source.unsplash.com/random/100x100/?apples"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/1/AS/FO/QN/45117192/fresh-organic-apple-250x250.jpg"
   },
   {
     id: "32",
@@ -263,7 +263,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 60.00,
     unit: "dozen",
-    image: "https://source.unsplash.com/random/100x100/?bananas"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/495979513/NR/EB/JV/92589310/fresh-banana-250x250.jpg"
   },
   {
     id: "33",
@@ -271,7 +271,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 200.00,
     unit: "kg",
-    image: "https://source.unsplash.com/random/100x100/?mangoes"
+    image: "https://5.imimg.com/data5/SELLER/Default/2022/11/ZN/KO/SM/135721374/whatsapp-image-2022-11-10-at-12-14-11-pm-250x250.jpeg"
   },
   {
     id: "34",
@@ -279,7 +279,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 100.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?grapes"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/1/480637810/OK/PE/PG/157753997/capsule-grapes-250x250.jpg"
   },
   {
     id: "35",
@@ -287,7 +287,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 80.00,
     unit: "kg",
-    image: "https://source.unsplash.com/random/100x100/?oranges"
+    image: "https://5.imimg.com/data5/SELLER/Default/2022/9/OH/QA/NX/45117192/fresh-nagpur-orange-250x250.png"
   },
   {
     id: "36",
@@ -295,7 +295,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 120.00,
     unit: "250g",
-    image: "https://source.unsplash.com/random/100x100/?strawberries"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/12/369688610/JT/ML/EH/204293324/frozen-strawberry-fruit-250x250.jpg"
   },
   {
     id: "37",
@@ -303,7 +303,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 90.00,
     unit: "piece",
-    image: "https://source.unsplash.com/random/100x100/?watermelon"
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD0qedAEEvk9S0-G_e3ur6BXTD_5k7UJ4Cog&s"
   },
   {
     id: "38",
@@ -311,7 +311,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 70.00,
     unit: "dozen",
-    image: "https://source.unsplash.com/random/100x100/?eggs"
+    image: "https://5.imimg.com/data5/ANDROID/Default/2025/2/486583821/NX/DM/HU/62611233/product-jpeg-250x250.jpg"
   },
   {
     id: "39",
@@ -319,7 +319,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 120.00,
     unit: "pack",
-    image: "https://source.unsplash.com/random/100x100/?cheese-slices"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/492987850/MU/FK/RQ/25273339/dynamix-cheese-slices-yellow-765-gm-250x250.jpg"
   },
   {
     id: "40",
@@ -327,7 +327,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 220.00,
     unit: "200g",
-    image: "https://source.unsplash.com/random/100x100/?mozzarella-cheese"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/2/489587763/LB/LC/TU/192429941/077b0992-bca9-433d-be49-7c70862f2991-250x250.jpeg"
   },
   {
     id: "41",
@@ -335,7 +335,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 250.00,
     unit: "200g",
-    image: "https://source.unsplash.com/random/100x100/?cheddar-cheese"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/2/489587763/LB/LC/TU/192429941/077b0992-bca9-433d-be49-7c70862f2991-250x250.jpeg"
   },
   {
     id: "42",
@@ -343,7 +343,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 45.00,
     unit: "400g",
-    image: "https://source.unsplash.com/random/100x100/?yogurt"
+    image: "https://2.imimg.com/data2/NA/PX/MY-3216051/dhahi-250x250.jpg"
   },
   {
     id: "43",
@@ -351,7 +351,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 60.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/100x100/?butter"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/6/316688705/PN/SE/NW/11017095/white-mist-cow-butter-500g-250x250.jpg"
   },
   {
     id: "44",
@@ -359,7 +359,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 450.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?ghee"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/4/501590982/EH/TA/VT/224706345/organic-cow-ghee-250x250.jpg"
   },
   {
     id: "45",
@@ -367,7 +367,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 60.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/100x100/?cumin-seeds"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/8/446069630/DH/TK/CI/89967469/cumin-seed-jeera-250x250.png"
   },
   {
     id: "46",
@@ -375,7 +375,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 55.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/100x100/?coriander-seeds"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/4/297112970/TI/NZ/TT/7904694/coriander-200g-front-250x250.png"
   },
   {
     id: "47",
@@ -383,7 +383,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 50.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/100x100/?mustard-seeds"
+    image: "https://5.imimg.com/data5/SELLER/Default/2022/1/JK/BJ/EI/8491760/mustard-seeds-250x250.jpg"
   },
   {
     id: "48",
@@ -391,7 +391,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 40.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/100x100/?fenugreek-seeds"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/495211772/FR/WZ/KE/160743515/dried-fenugreek-seeds-250x250.jpeg"
   },
   {
     id: "49",
@@ -399,7 +399,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 70.00,
     unit: "50g",
-    image: "https://source.unsplash.com/random/100x100/?cinnamon-sticks"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/1/379576005/PT/HX/YC/5751538/cinnamon-stick-250x250.jpg"
   },
   {
     id: "50",
@@ -407,7 +407,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 120.00,
     unit: "50g",
-    image: "https://source.unsplash.com/random/100x100/?cardamom"
+    image: "http://5.imimg.com/data5/SELLER/Default/2023/7/325315184/WU/BL/ZQ/9320513/green-cardamom-elaichi-500x500.jpeg"
   },
   {
     id: "51",
@@ -415,7 +415,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 80.00,
     unit: "50g",
-    image: "https://source.unsplash.com/random/100x100/?cloves"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/12/477378642/GF/SN/MV/9518350/download-8-250x250.jpg"
   },
   {
     id: "52",
@@ -423,7 +423,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 30.00,
     unit: "20g",
-    image: "https://source.unsplash.com/random/100x100/?bay-leaves"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/493665844/MT/DM/VJ/196307877/dried-bay-leaves-250x250.jpg"
   },
   {
     id: "53",
@@ -431,7 +431,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 90.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/100x100/?black-pepper"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/10/457191506/AJ/FO/TI/219074586/organic-black-pepper-1-250x250.jpg"
   },
   {
     id: "54",
@@ -439,7 +439,7 @@ export const products: Product[] = [
     category: "Spices & Masalas",
     price: 110.00,
     unit: "100g",
-    image: "https://source.unsplash.com/random/100x100/?kashmiri-chilli"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/3/SO/TH/ZH/119939588/7-250x250.jpg"
   },
   {
     id: "55",
@@ -447,7 +447,7 @@ export const products: Product[] = [
     category: "Meat & Seafood",
     price: 180.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?chicken-curry"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/2/490281262/ZC/QL/WJ/240428687/chicken-curry-cut-without-skin-250x250.jpg"
   },
   {
     id: "56",
@@ -455,7 +455,7 @@ export const products: Product[] = [
     category: "Meat & Seafood",
     price: 550.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?mutton"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/1/483385201/AE/QH/CM/8793846/fresh-mutton-meat-250x250.jpg"
   },
   {
     id: "57",
@@ -463,7 +463,7 @@ export const products: Product[] = [
     category: "Meat & Seafood",
     price: 200.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?fish"
+    image: "https://5.imimg.com/data5/SELLER/Default/2020/11/BV/SA/NI/24808465/small-fish-surmai-250x250.png"
   },
   {
     id: "58",
@@ -471,7 +471,7 @@ export const products: Product[] = [
     category: "Meat & Seafood",
     price: 350.00,
     unit: "250g",
-    image: "https://source.unsplash.com/random/100x100/?prawns"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/3/398739696/PE/ZW/OF/162018206/8-1-hon-tiger-prawns-250x250.jpeg"
   },
   {
     id: "59",
@@ -479,7 +479,7 @@ export const products: Product[] = [
     category: "Meat & Seafood",
     price: 400.00,
     unit: "piece",
-    image: "https://source.unsplash.com/random/100x100/?pomfret"
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/10/460577542/TG/MV/YK/223117386/frozen-pomfret-fish-250x250.jpg"
   },
   {
     id: "60",
@@ -487,7 +487,7 @@ export const products: Product[] = [
     category: "Dairy & Eggs",
     price: 70.00,
     unit: "dozen",
-    image: "https://source.unsplash.com/random/100x100/?eggs"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/498920535/YB/ZP/PM/92486766/pure-desi-egg-250x250.jpg"
   },
   {
     id: "61",
@@ -495,7 +495,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 100.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?moong-dal"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/5/308788830/QH/VR/GV/5358436/30kg-packaging-bag-250x250.png"
   },
   {
     id: "62",
@@ -503,7 +503,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 90.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?masoor-dal"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/8/333033913/KF/XR/OI/68421316/malka-masoor-dal-250x250.jpeg"
   },
   {
     id: "63",
@@ -511,7 +511,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 110.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?urad-dal"
+    image: "https://5.imimg.com/data5/ANDROID/Default/2025/2/492210323/SZ/EH/AW/122101530/product-jpeg-250x250.jpg"
   },
   {
     id: "64",
@@ -519,7 +519,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 95.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?chana-dal"
+    image: "https://5.imimg.com/data5/SELLER/Default/2025/3/493442191/TH/SR/AG/48368029/yellow-chana-dal-250x250.jpg"
   },
   {
     id: "65",
@@ -527,7 +527,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 100.00,
     unit: "kg",
-    image: "https://source.unsplash.com/random/100x100/?brown-rice"
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/2/NG/HY/EL/64098181/1-38--250x250.jpeg"
   },
   {
     id: "66",
@@ -535,7 +535,7 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 250.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?quinoa"
+    image: "https://5.imimg.com/data5/ANDROID/Default/2025/1/478006498/IW/NO/VH/76708793/product-jpeg-250x250.jpg"
   },
   {
     id: "67",
@@ -543,450 +543,4 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 120.00,
     unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?oats"
-  },
-  {
-    id: "68",
-    name: "Sooji/Semolina",
-    category: "Rice & Grains",
-    price: 40.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?semolina"
-  },
-  {
-    id: "69",
-    name: "Poha",
-    category: "Rice & Grains",
-    price: 50.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?poha"
-  },
-  {
-    id: "70",
-    name: "Corn Flakes",
-    category: "Breakfast & Cereal",
-    price: 150.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?corn-flakes"
-  },
-  {
-    id: "71",
-    name: "Muesli",
-    category: "Breakfast & Cereal",
-    price: 220.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?muesli"
-  },
-  {
-    id: "72",
-    name: "Bread",
-    category: "Bakery",
-    price: 40.00,
-    unit: "pack",
-    image: "https://source.unsplash.com/random/100x100/?bread"
-  },
-  {
-    id: "73",
-    name: "Burger Buns",
-    category: "Bakery",
-    price: 35.00,
-    unit: "pack",
-    image: "https://source.unsplash.com/random/100x100/?burger-buns"
-  },
-  {
-    id: "74",
-    name: "Pav",
-    category: "Bakery",
-    price: 30.00,
-    unit: "pack",
-    image: "https://source.unsplash.com/random/100x100/?pav"
-  },
-  {
-    id: "75",
-    name: "Cake",
-    category: "Bakery",
-    price: 350.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?cake"
-  },
-  {
-    id: "76",
-    name: "Cookies",
-    category: "Bakery",
-    price: 80.00,
-    unit: "pack",
-    image: "https://source.unsplash.com/random/100x100/?cookies"
-  },
-  {
-    id: "77",
-    name: "Cashews",
-    category: "Dry Fruits & Nuts",
-    price: 550.00,
-    unit: "250g",
-    image: "https://source.unsplash.com/random/100x100/?cashews"
-  },
-  {
-    id: "78",
-    name: "Almonds",
-    category: "Dry Fruits & Nuts",
-    price: 500.00,
-    unit: "250g",
-    image: "https://source.unsplash.com/random/100x100/?almonds"
-  },
-  {
-    id: "79",
-    name: "Walnuts",
-    category: "Dry Fruits & Nuts",
-    price: 600.00,
-    unit: "250g",
-    image: "https://source.unsplash.com/random/100x100/?walnuts"
-  },
-  {
-    id: "80",
-    name: "Raisins",
-    category: "Dry Fruits & Nuts",
-    price: 180.00,
-    unit: "200g",
-    image: "https://source.unsplash.com/random/100x100/?raisins"
-  },
-  {
-    id: "81",
-    name: "Dates",
-    category: "Dry Fruits & Nuts",
-    price: 200.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?dates"
-  },
-  {
-    id: "82",
-    name: "Sunflower Oil",
-    category: "Oils & Ghee",
-    price: 140.00,
-    unit: "1L",
-    image: "https://source.unsplash.com/random/100x100/?sunflower-oil"
-  },
-  {
-    id: "83",
-    name: "Olive Oil",
-    category: "Oils & Ghee",
-    price: 550.00,
-    unit: "500ml",
-    image: "https://source.unsplash.com/random/100x100/?olive-oil"
-  },
-  {
-    id: "84",
-    name: "Mustard Oil",
-    category: "Oils & Ghee",
-    price: 180.00,
-    unit: "1L",
-    image: "https://source.unsplash.com/random/100x100/?mustard-oil"
-  },
-  {
-    id: "85",
-    name: "Coconut Oil",
-    category: "Oils & Ghee",
-    price: 250.00,
-    unit: "500ml",
-    image: "https://source.unsplash.com/random/100x100/?coconut-oil"
-  },
-  {
-    id: "86",
-    name: "Sugar",
-    category: "Staples",
-    price: 45.00,
-    unit: "kg",
-    image: "https://source.unsplash.com/random/100x100/?sugar"
-  },
-  {
-    id: "87",
-    name: "Salt",
-    category: "Staples",
-    price: 20.00,
-    unit: "kg",
-    image: "https://source.unsplash.com/random/100x100/?salt"
-  },
-  {
-    id: "88",
-    name: "Jaggery",
-    category: "Staples",
-    price: 60.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?jaggery"
-  },
-  {
-    id: "89",
-    name: "Tea",
-    category: "Beverages",
-    price: 140.00,
-    unit: "250g",
-    image: "https://source.unsplash.com/random/100x100/?tea"
-  },
-  {
-    id: "90",
-    name: "Coffee",
-    category: "Beverages",
-    price: 180.00,
-    unit: "200g",
-    image: "https://source.unsplash.com/random/100x100/?coffee"
-  },
-  {
-    id: "91",
-    name: "Fruit Juice",
-    category: "Beverages",
-    price: 120.00,
-    unit: "1L",
-    image: "https://source.unsplash.com/random/100x100/?fruit-juice"
-  },
-  {
-    id: "92",
-    name: "Soft Drinks",
-    category: "Beverages",
-    price: 80.00,
-    unit: "2L",
-    image: "https://source.unsplash.com/random/100x100/?soft-drinks"
-  },
-  {
-    id: "93",
-    name: "Pasta",
-    category: "International Cuisine",
-    price: 80.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?pasta"
-  },
-  {
-    id: "94",
-    name: "Spaghetti",
-    category: "International Cuisine",
-    price: 90.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?spaghetti"
-  },
-  {
-    id: "95",
-    name: "Noodles",
-    category: "International Cuisine",
-    price: 40.00,
-    unit: "pack",
-    image: "https://source.unsplash.com/random/100x100/?noodles"
-  },
-  {
-    id: "96",
-    name: "Pasta Sauce",
-    category: "International Cuisine",
-    price: 160.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?pasta-sauce"
-  },
-  {
-    id: "97",
-    name: "Soy Sauce",
-    category: "International Cuisine",
-    price: 120.00,
-    unit: "200ml",
-    image: "https://source.unsplash.com/random/100x100/?soy-sauce"
-  },
-  {
-    id: "98",
-    name: "Vinegar",
-    category: "International Cuisine",
-    price: 80.00,
-    unit: "200ml",
-    image: "https://source.unsplash.com/random/100x100/?vinegar"
-  },
-  {
-    id: "99",
-    name: "Honey",
-    category: "Staples",
-    price: 220.00,
-    unit: "250g",
-    image: "https://source.unsplash.com/random/100x100/?honey"
-  },
-  {
-    id: "100",
-    name: "Peanut Butter",
-    category: "Spreads",
-    price: 150.00,
-    unit: "200g",
-    image: "https://source.unsplash.com/random/100x100/?peanut-butter"
-  },
-  {
-    id: "101",
-    name: "Jam",
-    category: "Spreads",
-    price: 120.00,
-    unit: "200g",
-    image: "https://source.unsplash.com/random/100x100/?jam"
-  },
-  {
-    id: "102",
-    name: "Nutella",
-    category: "Spreads",
-    price: 280.00,
-    unit: "350g",
-    image: "https://source.unsplash.com/random/100x100/?nutella"
-  },
-  {
-    id: "103",
-    name: "Chocolate Syrup",
-    category: "Spreads",
-    price: 150.00,
-    unit: "200ml",
-    image: "https://source.unsplash.com/random/100x100/?chocolate-syrup"
-  },
-  {
-    id: "104",
-    name: "Maple Syrup",
-    category: "Spreads",
-    price: 450.00,
-    unit: "250ml",
-    image: "https://source.unsplash.com/random/100x100/?maple-syrup"
-  },
-  {
-    id: "105",
-    name: "Coconut Milk",
-    category: "International Cuisine",
-    price: 80.00,
-    unit: "400ml",
-    image: "https://source.unsplash.com/random/100x100/?coconut-milk"
-  },
-  {
-    id: "106",
-    name: "Tofu",
-    category: "International Cuisine",
-    price: 120.00,
-    unit: "400g",
-    image: "https://source.unsplash.com/random/100x100/?tofu"
-  },
-  {
-    id: "107",
-    name: "Mushrooms",
-    category: "Fruits & Vegetables",
-    price: 60.00,
-    unit: "200g",
-    image: "https://source.unsplash.com/random/100x100/?mushrooms"
-  },
-  {
-    id: "108",
-    name: "Coconut Water",
-    category: "Beverages",
-    price: 55.00,
-    unit: "500ml",
-    image: "https://source.unsplash.com/random/100x100/?coconut-water"
-  },
-  {
-    id: "109",
-    name: "Fresh Cream",
-    category: "Dairy & Eggs",
-    price: 75.00,
-    unit: "200ml",
-    image: "https://source.unsplash.com/random/100x100/?fresh-cream"
-  },
-  {
-    id: "110",
-    name: "Condensed Milk",
-    category: "Dairy & Eggs",
-    price: 120.00,
-    unit: "400g",
-    image: "https://source.unsplash.com/random/100x100/?condensed-milk"
-  },
-  {
-    id: "111",
-    name: "Ice Cream (Vanilla)",
-    category: "Frozen Foods",
-    price: 220.00,
-    unit: "500ml",
-    image: "https://source.unsplash.com/random/100x100/?ice-cream"
-  },
-  {
-    id: "112",
-    name: "Frozen Peas",
-    category: "Frozen Foods",
-    price: 80.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?frozen-peas"
-  },
-  {
-    id: "113",
-    name: "Frozen Mixed Vegetables",
-    category: "Frozen Foods",
-    price: 120.00,
-    unit: "500g",
-    image: "https://source.unsplash.com/random/100x100/?frozen-vegetables"
-  },
-  {
-    id: "114",
-    name: "Frozen Pizza",
-    category: "Frozen Foods",
-    price: 220.00,
-    unit: "piece",
-    image: "https://source.unsplash.com/random/100x100/?frozen-pizza"
-  },
-  {
-    id: "115",
-    name: "Basil",
-    category: "Herbs",
-    price: 30.00,
-    unit: "bunch",
-    image: "https://source.unsplash.com/random/100x100/?basil"
-  },
-  {
-    id: "116",
-    name: "Rosemary",
-    category: "Herbs",
-    price: 40.00,
-    unit: "bunch",
-    image: "https://source.unsplash.com/random/100x100/?rosemary"
-  },
-  {
-    id: "117",
-    name: "Thyme",
-    category: "Herbs",
-    price: 35.00,
-    unit: "bunch",
-    image: "https://source.unsplash.com/random/100x100/?thyme"
-  },
-  {
-    id: "118",
-    name: "Oregano",
-    category: "Herbs",
-    price: 25.00,
-    unit: "10g",
-    image: "https://source.unsplash.com/random/100x100/?oregano"
-  },
-  {
-    id: "119",
-    name: "Mixed Herbs",
-    category: "Herbs",
-    price: 120.00,
-    unit: "50g",
-    image: "https://source.unsplash.com/random/100x100/?mixed-herbs"
-  },
-  {
-    id: "120",
-    name: "Bean Sprouts",
-    category: "International Cuisine",
-    price: 40.00,
-    unit: "200g",
-    image: "https://source.unsplash.com/random/100x100/?bean-sprouts"
-  }
-];
-
-export const categories = [
-  "All",
-  "Fruits & Vegetables",
-  "Dairy & Eggs",
-  "Spices & Masalas",
-  "Rice & Grains",
-  "Meat & Seafood",
-  "Bakery",
-  "Dry Fruits & Nuts",
-  "Oils & Ghee",
-  "Staples",
-  "Beverages",
-  "International Cuisine",
-  "Spreads",
-  "Frozen Foods",
-  "Herbs",
-  "Breakfast & Cereal",
-  "Snacks"
-];
+    image: "https://5.imimg.com/data5/IOS/Default/20
