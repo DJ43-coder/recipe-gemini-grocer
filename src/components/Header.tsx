@@ -1,3 +1,4 @@
+
 import { MapPin, Search, ShoppingCart } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useProductStore } from "@/store/productStore";
@@ -40,7 +41,7 @@ export function Header() {
           
           <div className="flex items-center space-x-2 text-gray-700">
             <MapPin size={18} className="text-green-500 flex-shrink-0" />
-            <div className="max-w-[200px] truncate">
+            <div className="max-w-[250px] truncate">
               {loading ? (
                 <Skeleton className="h-4 w-[150px]" />
               ) : error ? (
