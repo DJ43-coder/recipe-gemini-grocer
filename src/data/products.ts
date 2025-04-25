@@ -303,7 +303,7 @@ export const products: Product[] = [
     category: "Fruits & Vegetables",
     price: 90.00,
     unit: "piece",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD0qedAEEvk9S0-G_e3ur6BXTD_5k7UJ4Cog&s"
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD0qedAEEvk9S0-G_e3ur6BXTD_5k7UJ4Cog&usqp=CAU"
   },
   {
     id: "38",
