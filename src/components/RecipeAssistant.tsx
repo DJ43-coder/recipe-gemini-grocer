@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -92,6 +93,9 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
     const matchingProduct = findMatchingProduct(ingredient.name);
     
     if (matchingProduct) {
+      // Update the ingredient price to match the product price from the database
+      ingredient.price = matchingProduct.price;
+      
       addToCart(matchingProduct);
       toast.success(`Added ${matchingProduct.name} to cart`);
     } else {
@@ -113,6 +117,18 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
   const handleAddAllIngredients = () => {
     if (!recipe) return;
     
+    // Update all ingredient prices to match products database before adding to cart
+    recipe.ingredients.forEach(ingredient => {
+      const matchingProduct = findMatchingProduct(ingredient.name);
+      if (matchingProduct) {
+        ingredient.price = matchingProduct.price;
+      }
+    });
+    
+    // Update total price based on updated ingredient prices
+    recipe.totalPrice = recipe.ingredients.reduce((total, ing) => total + ing.price, 0);
+    
+    // Now add ingredients to cart with corrected prices
     recipe.ingredients.forEach(ingredient => {
       handleAddIngredientToCart(ingredient);
     });
@@ -123,6 +139,17 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
   
   const handleSaveRecipe = () => {
     if (!recipe) return;
+    
+    // Update all ingredient prices to match products database before saving
+    recipe.ingredients.forEach(ingredient => {
+      const matchingProduct = findMatchingProduct(ingredient.name);
+      if (matchingProduct) {
+        ingredient.price = matchingProduct.price;
+      }
+    });
+    
+    // Update total price based on updated ingredient prices
+    recipe.totalPrice = recipe.ingredients.reduce((total, ing) => total + ing.price, 0);
     
     const existingRecipesJson = localStorage.getItem('savedRecipes');
     let existingRecipes = [];
@@ -229,6 +256,11 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
               <div className="space-y-3 mb-6">
                 {recipe.ingredients.map((ingredient, index) => {
                   const isAvailable = isIngredientAvailable(ingredient.name);
+                  // Update the ingredient price to match products database for display
+                  const matchingProduct = findMatchingProduct(ingredient.name);
+                  if (matchingProduct) {
+                    ingredient.price = matchingProduct.price;
+                  }
                   return (
                     <div key={index} className="flex justify-between items-center">
                       <div className="flex items-center">
