@@ -1,10 +1,9 @@
 
 import { create } from 'zustand';
-import { products as initialProducts, categories as initialCategories } from '@/data/products';
+import { products as initialProducts } from '@/data/products';
 
 interface ProductStore {
   products: typeof initialProducts;
-  categories: typeof initialCategories;
   selectedCategory: string;
   searchQuery: string;
   setSelectedCategory: (category: string) => void;
@@ -14,7 +13,6 @@ interface ProductStore {
 
 export const useProductStore = create<ProductStore>((set, get) => ({
   products: initialProducts,
-  categories: initialCategories,
   selectedCategory: 'All',
   searchQuery: '',
   

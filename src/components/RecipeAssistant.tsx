@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,7 +34,6 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
     setError("");
     
     try {
-      // Use the generateRecipe function with the updated API key and model
       const generatedRecipe = await generateRecipe(dishName, servings);
       setRecipe(generatedRecipe);
       toast.success("Recipe generated successfully!");
@@ -43,7 +41,6 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
       console.error("Error generating recipe:", err);
       setError(`Failed to generate recipe: ${err instanceof Error ? err.message : 'Unknown error'}`);
       
-      // Fallback to the demo recipe if the API call fails
       try {
         const fallbackRecipe = await handleNoApiKey();
         setRecipe(fallbackRecipe);
@@ -69,7 +66,28 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
       ingredientName.toLowerCase().includes(product.name.toLowerCase())
     );
   };
-  
+
+  const calculateRequiredQuantity = (ingredient: RecipeIngredient) => {
+    const matchingProduct = findMatchingProduct(ingredient.name);
+    if (!matchingProduct) return ingredient.quantity;
+
+    const requiredAmount = parseFloat(ingredient.quantity);
+    const productUnit = matchingProduct.unit;
+    
+    const getStandardUnit = (unit: string) => {
+      if (unit.includes('kg')) return 1000;
+      if (unit.includes('g')) return parseInt(unit);
+      return 1;
+    };
+
+    const productAmount = getStandardUnit(productUnit);
+    const neededAmount = getStandardUnit(ingredient.quantity);
+
+    const unitsNeeded = Math.ceil(neededAmount / productAmount);
+    
+    return `${unitsNeeded}${matchingProduct.unit}`;
+  };
+
   const handleAddIngredientToCart = (ingredient: RecipeIngredient) => {
     const matchingProduct = findMatchingProduct(ingredient.name);
     
@@ -77,14 +95,13 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
       addToCart(matchingProduct);
       toast.success(`Added ${matchingProduct.name} to cart`);
     } else {
-      // Create a custom product from the ingredient
       const product = {
         id: `ing-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         name: ingredient.name,
         price: ingredient.price,
-        image: getIngredientImageUrl(ingredient.name), // Use our new image function
+        image: getIngredientImageUrl(ingredient.name),
         category: "Recipe Ingredients",
-        unit: ingredient.quantity,
+        unit: calculateRequiredQuantity(ingredient),
         popular: false
       };
       
@@ -96,20 +113,17 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
   const handleAddAllIngredients = () => {
     if (!recipe) return;
     
-    // Add all ingredients to cart
     recipe.ingredients.forEach(ingredient => {
       handleAddIngredientToCart(ingredient);
     });
     
     toast.success("All ingredients added to cart!");
-    // Close the recipe assistant
     onClose();
   };
   
   const handleSaveRecipe = () => {
     if (!recipe) return;
     
-    // Get existing saved recipes
     const existingRecipesJson = localStorage.getItem('savedRecipes');
     let existingRecipes = [];
     
@@ -121,22 +135,18 @@ export function RecipeAssistant({ isOpen, onClose }: RecipeAssistantProps) {
       }
     }
     
-    // Create a new recipe object with an ID and image
     const recipeToSave = {
       ...recipe,
       id: Date.now().toString(),
       imageUrl: `https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=300&auto=format&fit=crop`
     };
     
-    // Add the new recipe
     const updatedRecipes = [...existingRecipes, recipeToSave];
     
-    // Save to localStorage
     localStorage.setItem('savedRecipes', JSON.stringify(updatedRecipes));
     
     toast.success("Recipe saved successfully!");
     
-    // Optionally navigate to recipes page
     onClose();
     navigate('/recipes');
   };
