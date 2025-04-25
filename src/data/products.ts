@@ -543,4 +543,6 @@ export const products: Product[] = [
     category: "Rice & Grains",
     price: 120.00,
     unit: "500g",
-    image: "https://5.imimg.com/data5/IOS/Default/20
+    image: "https://5.imimg.com/data5/IOS/Default/2024/6/427565410/SG/TG/UL/57519681/product-jpeg-250x250.png"
+  }
+];
