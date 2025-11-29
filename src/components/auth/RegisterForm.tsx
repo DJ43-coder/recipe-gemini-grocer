@@ -5,21 +5,36 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Mail, Lock, UserPlus } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
 
 export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email || !password) {
+      toast.error("Please enter both email and password");
+      return;
+    }
+
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
+
     setIsLoading(true);
-    
-    // TODO: Implement actual registration logic when backend is connected
-    toast.info("Registration functionality will be added once backend is connected");
-    
-    setIsLoading(false);
+    try {
+      await register(email, password);
+    } catch {
+      // Error handled by useAuth
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoogleRegister = () => {
