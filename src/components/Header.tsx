@@ -1,15 +1,17 @@
 
-import { MapPin, Search, ShoppingCart } from "lucide-react";
+import { MapPin, Search, ShoppingCart, LogOut } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useProductStore } from "@/store/productStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLocation } from "@/hooks/useLocation";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useAuth } from "@/hooks/useAuth";
 
 export function Header() {
   const { openCart, getTotalItems } = useCartStore();
   const { searchQuery, setSearchQuery } = useProductStore();
+  const { logout } = useAuth();
   const cartItemCount = getTotalItems();
   const { address, loading, error } = useLocation();
   
@@ -66,6 +68,15 @@ export function Header() {
                 {cartItemCount}
               </span>
             )}
+          </Button>
+          
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={logout}
+            title="Logout"
+          >
+            <LogOut size={20} />
           </Button>
         </div>
       </div>
