@@ -26,73 +26,104 @@ An AI-powered grocery shopping website that helps users discover recipes and ing
 
 ### Prerequisites
 
-- Node.js 18+ installed
-- A running backend API (see BACKEND_API_SPEC.md)
+- Node.js 18 or higher
+- Docker and Docker Compose (for backend services)
+- Or: PostgreSQL 16 and Redis 7 installed locally
 
 ### Installation
 
-1. Clone the repository
+#### 1. Start Backend Services
+
+Using Docker Compose (recommended):
 ```bash
-git clone <repository-url>
-cd grocery-scout
+# From project root
+docker-compose up -d
 ```
 
-2. Install dependencies
+This will start:
+- PostgreSQL on port 5432
+- Redis on port 6379
+- Backend API on port 3000
+
+Wait for services to be healthy, then run migrations:
 ```bash
+cd backend
 npm install
+npm run migrate
+cd ..
 ```
 
-3. Configure environment variables
+#### 2. Start Frontend
+
 ```bash
+# Install frontend dependencies
+npm install
+
+# Configure environment
 cp .env.example .env
-```
+# Edit .env if needed (defaults to http://localhost:3000)
 
-Edit `.env` and set your backend API URL:
-```
-VITE_API_BASE_URL=http://localhost:3000
-```
+# Update Gemini API key in src/services/geminiService.ts
+# Replace "your-gemini-api-key-here" with your actual key
 
-4. Update the Gemini API key in `src/services/geminiService.ts`
-
-5. Start the development server
-```bash
+# Start development server
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+The frontend will be available at `http://localhost:8080`.
 
-## Backend API Setup
+#### Alternative: Manual Backend Setup
 
-This frontend requires a backend API to handle:
-- User authentication (login/register/logout)
-- Product data management
-- Recipe storage
-- Session management with Redis
+If not using Docker, see `backend/README.md` for manual setup instructions.
 
-See `BACKEND_API_SPEC.md` for complete API specification including:
-- All required endpoints
-- Request/response formats
-- Authentication flow with JWT + refresh tokens
-- Security requirements
-- Database schema
-- Redis configuration
+## Backend Architecture
 
-### Key Backend Requirements
+The backend is included in the `backend/` directory with:
 
-1. **Authentication**
-   - JWT-based with short-lived access tokens (15 min)
-   - Long-lived refresh tokens (7 days) in HttpOnly cookies
-   - Redis for session storage and token revocation
+- **Node.js + Express + TypeScript** server
+- **PostgreSQL** for data persistence
+- **Redis** for sessions and token management
+- **JWT authentication** with rotating refresh tokens
+- **Rate limiting** and security middleware
 
-2. **Security**
-   - HTTPS in production
-   - CORS configured for frontend origin
-   - Rate limiting on auth endpoints
-   - Input validation and sanitization
+### Backend Structure
+```
+backend/
+├── src/
+│   ├── config/          # Database and Redis configuration
+│   ├── controllers/     # Request handlers
+│   ├── middleware/      # Auth and validation middleware
+│   ├── routes/          # API route definitions
+│   ├── services/        # Business logic (sessions, tokens)
+│   ├── utils/           # JWT and password utilities
+│   └── server.ts        # Express app entry point
+├── migrations/          # Database migrations
+├── package.json
+└── tsconfig.json
+```
 
-3. **Database**
-   - PostgreSQL with users, user_roles, products, recipes tables
-   - See BACKEND_API_SPEC.md for full schema
+### API Endpoints
+
+**Authentication**:
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login with email/password
+- `POST /api/auth/refresh` - Refresh access token (automatic)
+- `POST /api/auth/logout` - Logout and invalidate session
+- `GET /api/auth/me` - Get current authenticated user
+
+**Products**:
+- `GET /api/products` - List all products (public)
+- `POST /api/products` - Create product (admin only)
+- `PUT /api/products/:id` - Update product (admin only)
+- `DELETE /api/products/:id` - Delete product (admin only)
+
+**Recipes**:
+- `GET /api/recipes` - Get user's saved recipes
+- `POST /api/recipes` - Save new recipe
+- `PUT /api/recipes/:id` - Update recipe
+- `DELETE /api/recipes/:id` - Delete recipe
+
+See `backend/README.md` for detailed documentation.
 
 ## Project Structure
 
@@ -138,10 +169,13 @@ The application features an AI-powered recipe assistant that can generate recipe
 
 ## Environment Variables
 
-```bash
-# Backend API URL
+### Frontend (.env)
+```
 VITE_API_BASE_URL=http://localhost:3000
 ```
+
+### Backend (backend/.env)
+See `backend/.env.example` for all backend environment variables including database URLs, JWT secrets, and cookie configuration.
 
 ## Development
 
