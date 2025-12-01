@@ -3,15 +3,19 @@
 
 An AI-powered grocery shopping website that helps users discover recipes and ingredients.
 
+## Mock Users
+
+**Admin**: admin@groceryscout.com / admin123  
+**Customer**: customer@groceryscout.com / customer123
+
 ## Features
 
-- Browse grocery products by category
-- Search functionality for finding specific products
-- AI-powered recipe assistant (powered by Gemini)
-- Shopping cart functionality
-- User authentication with JWT tokens
-- Responsive design for all device sizes
-- Recipe saving capabilities
+- User Authentication & Persistent Sessions
+- Shopping Cart (saved to database)
+- Order Placement & History
+- Admin Dashboard (product/order management)
+- AI Recipe Assistant (Gemini)
+- Browse & Search Products
 
 ## Technologies Used
 

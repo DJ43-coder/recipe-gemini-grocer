@@ -7,6 +7,8 @@ import { connectRedis } from './config/redis';
 import authRoutes from './routes/authRoutes';
 import productRoutes from './routes/productRoutes';
 import recipeRoutes from './routes/recipeRoutes';
+import orderRoutes from './routes/orderRoutes';
+import adminRoutes from './routes/adminRoutes';
 
 dotenv.config();
 
@@ -38,6 +40,8 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/recipes', recipeRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

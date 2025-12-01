@@ -25,4 +25,16 @@ export const API_ENDPOINTS = {
     UPDATE: (id: string) => `/api/recipes/${id}`,
     DELETE: (id: string) => `/api/recipes/${id}`,
   },
+  // Order endpoints
+  ORDERS: {
+    LIST: '/api/orders',
+    CREATE: '/api/orders',
+    DETAIL: (id: string) => `/api/orders/${id}`,
+    CART: '/api/orders/cart/items',
+  },
+  // Admin endpoints
+  ADMIN: {
+    ORDERS: '/api/admin/orders',
+    UPDATE_ORDER_STATUS: (id: string) => `/api/admin/orders/${id}/status`,
+  },
 } as const;

@@ -21,19 +21,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check for existing session on mount
     const initAuth = async () => {
       try {
         const currentUser = await authService.getCurrentUser();
         setUser(currentUser);
+        if (currentUser) {
+          const { useCartStore } = await import('@/store/cartStore');
+          await useCartStore.getState().loadFromBackend();
+        }
       } catch {
-        // No valid session
         setUser(null);
       } finally {
         setIsLoading(false);
       }
     };
-
     initAuth();
   }, []);
 
@@ -42,29 +43,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await authService.login({ email, password });
       setUser(response.user);
       toast.success('Logged in successfully!');
-      navigate('/home');
+      const { useCartStore } = await import('@/store/cartStore');
+      await useCartStore.getState().loadFromBackend();
+      navigate('/');
     } catch (error: any) {
       toast.error(error.message || 'Login failed');
       throw error;
     }
   };
 
-  const register = async (
-    email: string,
-    password: string,
-    firstName?: string,
-    lastName?: string
-  ) => {
+  const register = async (email: string, password: string, firstName?: string, lastName?: string) => {
     try {
-      const response = await authService.register({
-        email,
-        password,
-        firstName,
-        lastName,
-      });
+      const response = await authService.register({ email, password, firstName, lastName });
       setUser(response.user);
       toast.success('Account created successfully!');
-      navigate('/home');
+      const { useCartStore } = await import('@/store/cartStore');
+      await useCartStore.getState().loadFromBackend();
+      navigate('/');
     } catch (error: any) {
       toast.error(error.message || 'Registration failed');
       throw error;
@@ -73,6 +68,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
+      const { useCartStore } = await import('@/store/cartStore');
+      await useCartStore.getState().clearCart();
       await authService.logout();
       setUser(null);
       apiClient.setAccessToken(null);
@@ -84,16 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        isLoading,
-        isAuthenticated: !!user,
-        login,
-        register,
-        logout,
-      }}
-    >
+    <AuthContext.Provider value={{ user, isLoading, isAuthenticated: !!user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
